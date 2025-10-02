@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Filmes - Fase 1: Cadastro Manual (DCM Básico)</title>
+
+    <link rel="stylesheat" href="style.css">
+
+</head>
+<body>
+    
+    <h1>Catálogo de Filmes</h1>
+
+    <form id="cadastro-filme">
+        <h2>Adicionar Novo Filme</h2>
+        <div>
+            <label for="titulo">Título do Filme</label>
+            <input type="text" id="titulo" required>
+        </div>
+
+        <div>
+            <label for="sinopse">Sinopse:</label>
+            <textarea id="sinopse" required></textarea>
+        </div>
+
+        <button type="submit">Adicionar Filme</button>
+    </form>
+
+    <hr>
+
+    <h2>Minha Lista de Filme</h2>
+
+    <div id="lista-filme">
+        <p>Nenhum filme cadasstrado ainda.</p>
+    </div>
+
+    <script>
+        // 1. ARMAZENAMENTO DE DADOS
+        // Array global que irá guardar todos os filmes como objetos.
+        // Ex: [{ titulo: 'Filme X',sinopse: 'Sinopse Y'}]
+        const catalogo = [];
+
+        // 2. CAPTURA DE ELEMENTOS DO DOM (Document object model)
+        // Capturamos os elementos HTML que vamos interagir, usando seus IDs.
+        const form = document.getElementByld('cadastro-filme');
+        const listaFilmesContainer = document.getElementById('lista-filmes');
+
+        // -------------------------------------------------------------------
+        // FUNÇÃO DE REMOÇÃO
+        // -------------------------------------------------------------------
+        /**
+         * Remove um filme do array de dados e do elemento HTML na tela.
+         * @param {number} indice - A posição do filme no array 'catalogo' .
+         * @param {HTMLElement} elementoDCM - O elemento <div> do filme a ser removido da tela.
+         */
+        function removerFilme(indice, elementoDCM) {
+            // A. REMOÇÃO DO ARRAY (Lógica)
+            // splice(indice, 1) remove 1 elemento a partir da posição 'indice'.
+            // Isso atualiza o array 'catalogo'.
+            catalogo.splice(indice, 1);
+            // B. REMOÇAO DO DOM (Visual)
+            // O método remove() retira o elemento HTML da visualização do usuário.
+            elementoDOM.remove();
+
+            // Opcional: Atualiza a mensagem da listam se estiver vazia.
+            if (catalogo.lenght === 0) {
+                listaFilmesContainer.innerHTML = '<p>Nenhum filme cadastrado ainda.</p>';
+            }
+            
+            console.log(`Filme no índice ${indice} removido. Catálogo atualizado:`, catalogo);
+        }
+
+        // --------------------------------------------------------------------
+        // FUNÇÃO DE RENDERIZAÇÃO
+        // --------------------------------------------------------------------
+        /**
+         * Cria e exibe a estrutura HMTL de um filme na lista.
+         * @param {object} filme - O objeto {titulo, sinopse} do filme.
+         * @param {number} indice - O índice atual do filme no array 'catalogo'.
+         */
+        function renderizarFilme(filme, indice) {
+            // Remove a mensagem inicial se for o primeiro filme
+            if (catalogo.lenght === 1) {
+                listaFilmesContainer.innerHTML = '';
+            }
+
+            // A. CRIAÇÃO DE ELEMENTOS HTML (document.createElement)
+
+            // Cria a <div> que será o contêiner de cada filme.
+                const filmeDiv = document.createElement('div');
+                filmeDiv.classlist.add('filme-item'); // Adiciona uma classe para estilização
+
+                // Cria o <h3> para o título e define seu texto.
+                    const tituloH3 = document.createElement('p');
+                    sinopseP.textContent = filme.sinopse;
+
+                    // Cria o botão de remoção
+        }
+ </body>
+ </html>
