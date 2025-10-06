@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
     <link rel="stylesheat" href="style.css">
 
 </head>
+
 <body>
-    
+
     <h1>Catálogo de Filmes</h1>
 
     <form id="cadastro-filme">
@@ -67,7 +69,7 @@
             if (catalogo.lenght === 0) {
                 listaFilmesContainer.innerHTML = '<p>Nenhum filme cadastrado ainda.</p>';
             }
-            
+
             console.log(`Filme no índice ${indice} removido. Catálogo atualizado:`, catalogo);
         }
 
@@ -88,14 +90,81 @@
             // A. CRIAÇÃO DE ELEMENTOS HTML (document.createElement)
 
             // Cria a <div> que será o contêiner de cada filme.
-                const filmeDiv = document.createElement('div');
-                filmeDiv.classlist.add('filme-item'); // Adiciona uma classe para estilização
+            const filmeDiv = document.createElement('div');
+            filmeDiv.classlist.add('filme-item'); // Adiciona uma classe para estilização
 
-                // Cria o <h3> para o título e define seu texto.
-                    const tituloH3 = document.createElement('p');
-                    sinopseP.textContent = filme.sinopse;
+            // Cria o <h3> para o título e define seu texto.
+            const tituloH3 = document.createElement('p');
+            sinopseP.textContent = filme.sinopse;
 
-                    // Cria o botão de remoção
+            // Cria o botão de remoção
+            const removerBotao = document.createElement('button');
+            removerBotao.textContent = 'Remover';
+            removerBotao.classList.add('btn_remover');
+
+            // B. DEFINIÇÃO DO EVENTO DE REMOÇÃO (addEventlistener)
+            // Anexa a função 'removerFilme' ao clique do butão.
+            removerBotao.addEventListener('click', () => {
+                //Ao clicae,chamamos a funçao,passando o indice (posição) e a própria <div> (filmeDiv)
+                removerFilme(indice, filmeDiv);
+
+            });
+
+            // C. ANEXAR ELEMENTOS (appendchild)
+            // Monta estrutura Hierárquica:
+            // filmeDiv
+            //    |- tituloh3
+            //    |- sinopseP
+            //    |- removerBotao
+            filmeDiv.appendChild(tituloH3);
+            filmeDiv.appendChild(sinopseP);
+            filmeDiv.appendChild(removerBotao);
+
+            // D. INSERÇÃO NO DOM FIM
+            // adiciona o filme montado (filmeDiv) dentro do conteiner principal na página.
+            listaFilmesContainer.appendChild(filmeDiv);
         }
- </body>
- </html>
+
+        // -------------------------------
+        //FUNÇÃO PRINCIPAK E ADIÇAO (manipulador do formulario)
+        // -------------------------------
+        /**
+        *lida com o envio do formulario,captura os dados e salva o filme.
+        * @param {Event} evento - O evento de 'submit' do formulario.
+        */
+        function adicionaFilme(evento) {
+            // 3. Previne o recarregamento da página 
+            // O comportamento padrão de um formulario é recarregar a página. O orcentDefault() impede isso.
+            evento.preventDefault();
+
+            // 4. captura os valores dos campos 
+            const tituloInput = document.getElementById('titulo');
+            const sinopseInput = document.getElementById('sinopse');
+
+            //Criar o objeto JavaScript com os dados 
+            const novoFilme = {
+                titulo: tituloInput.value,
+                sinopse: sinopseInput.value
+            };
+
+
+            // 6. Renderiza na tela
+            // Passamos o novo objetivo e seu índice (que é último, ou seja, tamanho - 1)
+            renderizarFilme(novoFilme, catalogo.length - 1);
+
+            // 7. Limpa o formulario 
+            // O método .reset() limpa todos os campos do formulario oara o proximo cadastro.
+
+            form.reset();
+        }
+
+        // 8. ESCUTANDO O EVENTO DO BOTÃO/FORMULARIO
+        // Anexamos a função 'adicionarFilme' ao evento de 'submit' do formulario 
+        form.addEventListener('submit', adicionaFilme);
+
+        console.log("JavaScript carregado. Pronto para iniciar o catalogo");
+
+    </script>
+</body>
+
+</html>
