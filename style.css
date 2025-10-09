@@ -64,6 +64,6 @@ button:hover {
     font-style: italic;
     margin-bottom: 10px;
 }
-.filme-item .btn-remover:houver {
+.filme-item .btn-remover:hover   {
     background-color: #c82333;
 }
