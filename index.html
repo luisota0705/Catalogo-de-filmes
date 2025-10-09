@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Filmes - Fase 1: Cadastro Manual (DCM Básico)</title>
 
-    <link rel="stylesheat" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -45,9 +45,10 @@
 
         // 2. CAPTURA DE ELEMENTOS DO DOM (Document object model)
         // Capturamos os elementos HTML que vamos interagir, usando seus IDs.
-        const form = document.getElementByld('cadastro-filme');
-        const listaFilmesContainer = document.getElementById('lista-filmes');
-        // -------------------------------------------------------------------
+        const form = document.getElementById('cadastro-filme');
+        const listaFilmesContainer = document.getElementById('lista-filme');
+
+        // -------------------------------------------------------------------  
         // FUNÇÃO DE REMOÇÃO
         // -------------------------------------------------------------------
         /**
@@ -62,10 +63,10 @@
             catalogo.splice(indice, 1);
             // B. REMOÇAO DO DOM (Visual)
             // O método remove() retira o elemento HTML da visualização do usuário.
-            elementoDOM.remove();
+            elementoDCM.remove();
 
             // Opcional: Atualiza a mensagem da listam se estiver vazia.
-            if (catalogo.lenght === 0) {
+            if (catalogo.length === 0) {
                 listaFilmesContainer.innerHTML = '<p>Nenhum filme cadastrado ainda.</p>';
             }
 
@@ -82,7 +83,7 @@
          */
         function renderizarFilme(filme, indice) {
             // Remove a mensagem inicial se for o primeiro filme
-            if (catalogo.lenght === 1) {
+            if (catalogo.length === 1) {
                 listaFilmesContainer.innerHTML = '';
             }
 
@@ -93,7 +94,7 @@
             filmeDiv.classlist.add('filme-item'); // Adiciona uma classe para estilização
 
             // Cria o <h3> para o título e define seu texto.
-            const tituloH3 = document.createElement('p');
+            const sinopseP = document.createElement('p');
             sinopseP.textContent = filme.sinopse;
 
             // Cria o botão de remoção
@@ -145,7 +146,7 @@
                 titulo: tituloInput.value,
                 sinopse: sinopseInput.value
             };
-
+            catalogo.push(novoFilme);
 
             // 6. Renderiza na tela
             // Passamos o novo objetivo e seu índice (que é último, ou seja, tamanho - 1)
