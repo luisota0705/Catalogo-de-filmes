@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,44 @@
 </head>
 
 <body>
-  <h1>Catálogo de Filmes</h1>
+  <header class="header">
+    <div class="logo">► FILMFLIX</div>
+    <nav class="nav-menu">
+      <a href="#">Minha lista</a>
+      <a href="#">Genero</a>
+      <a href="#">Sobre</a>
+      <button class="menu-toggle">☰</button>
+    </nav>
+  </header>
 
-  <form id="cadastro-filme">
-    <h2>Adicionar Novo Filme (buscar por API)</h2>
-    <div>
-      <label for="titulo">Título do Filme: </label>
-      <input type="text" id="titulo" required>
-    </div>
-    <div>
-      <label for="sinopse">Sinopse (opcional):</label>
-      <textarea id="sinopse" placeholder="Digite uma sinopse (opcional)"></textarea>
-    </div>
-    <button type="submit">Buscar e Adicionar Filme</button>
-  </form>
+ <section class="controls-section">
+<div class="search-bar">
+<input type="text" placeholder="Q Buscar Filmes..." class="search-input">
+</div>
+<select class="filter-dropdown" aria-label="Genero">
+<option value="">Gênero</option>
+<option value="acao">Ação</option>
+<option value="comedia">Comédia</option>
+</select>
 
-  <hr>
-  <h2>Minha Lista de Filmes</h2>
-  <div id="lista-filmes">
-    <p>Nenhum filme cadastrado ainda.</p>
+<select class="filter-dropdown" aria-label="Ordenar por">
+<option value="">Genero</option>
+<option value="acao">Ação</option>
+<option value="comedia">Comedia</option>
+</select>
+
+<select class="filter-dropdown" aria-label="ordenar por">
+<option value="default">Ordenar</option>
+<option value="recentes">Mais recentes</option>
+<option value="avaliacao">Melhor Avaliação</option>
+</select>
+ </section>
+
+ <main class="main-content">
+  <div class="lista-filmes">
+    
   </div>
+ </main>
 
   <script>
     const API_KEY = 'f55f96f2';
@@ -151,7 +170,8 @@
 
     form.addEventListener('submit', adicionarFilme);
     carregarCatalogo();
-    
+
   </script>
 </body>
+
 </html>
