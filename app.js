@@ -1,4 +1,4 @@
-const OMDB_API_KEY = 'COLOQUE UA CHAVE';
+const OMDB_API_KEY = 'f55f96f2';
 const listaFilmesContainer = document.querySelector(`.lista-filmes`);
 const searchInput = document.querySelector(`.search-imput`);
 
