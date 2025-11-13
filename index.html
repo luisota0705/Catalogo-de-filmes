@@ -4,69 +4,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Filmes Fase 2: Consumo de API</title>
+  <title>Catálogo de Filmes - Fase 2: Consumo de API</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <!-- Cabeçalho -->
   <header class="header">
     <div class="logo">► FILMFLIX</div>
     <nav class="nav-menu">
       <a href="#">Minha lista</a>
-      <a href="#">Genero</a>
+      <a href="#">Gênero</a>
       <a href="#">Sobre</a>
-      <button class="menu-toggle">☰</button>
+      <button class="menu-toggle" aria-label="Abrir menu">☰</button>
     </nav>
   </header>
 
+  <!-- Barra de controle -->
   <section class="controls-section">
     <div class="search-bar">
-      <input type="text" placeholder="Q Buscar Filmes..." class="search-input">
+      <input
+        type="text"
+        placeholder="🔍 Buscar filmes..."
+        class="search-input"
+        aria-label="Buscar filmes"
+      >
     </div>
-    <select class="filter-dropdown" aria-label="Genero">
+
+    <select class="filter-dropdown" aria-label="Filtrar por gênero">
       <option value="">Gênero</option>
       <option value="acao">Ação</option>
       <option value="comedia">Comédia</option>
     </select>
 
-    <select class="filter-dropdown" aria-label="Ordenar por">
-      <option value="">Genero</option>
-      <option value="acao">Ação</option>
-      <option value="comedia">Comedia</option>
+    <select class="filter-dropdown" aria-label="Filtrar por idioma">
+      <option value="">Idioma</option>
+      <option value="ingles">Inglês</option>
+      <option value="portugues">Português</option>
     </select>
 
-    <select class="filter-dropdown" aria-label="ordenar por">
+    <select class="filter-dropdown" aria-label="Ordenar por">
       <option value="default">Ordenar</option>
       <option value="recentes">Mais recentes</option>
       <option value="avaliacao">Melhor Avaliação</option>
     </select>
   </section>
 
+  <!-- Lista principal de filmes -->
   <main class="main-content">
     <div class="lista-filmes">
-      <div class="card-filme">
-        <img src="[URL_DO_POSTER]" alt="titulo longo do filme" class="poster-filme">
-        <span class="avaliação">⭐ 7.4</span>
-        <div class="card-detalhes">
-          <h3 class="titulo-filme">titulo longo do filme (2025)</h3>
-          <button class="botao-adicionar">+ minha lista </button>
-        </div>
-      </div>
-
-
-      <div class="card-filme">
-        <img src="URL_DO_POSTER" alt="outro titulo" class="poster-filme">
-        <span class="avaliação"> 8.1 </span>
-        <div class="card-detalhes">
-          <h3 class="titulo-filme">Outro tituo incrivel (2024)</h3>
-          <button class="botao-adicionar">+ Minha lista</button>
-        </div>
-      </div>
-
+      <!-- Os cards serão criados dinamicamente via JavaScript -->
     </div>
   </main>
 
+  <script src="app.js"></script>
 </body>
-<script src="app.js"></script>
 
 </html>
