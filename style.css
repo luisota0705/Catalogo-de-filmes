@@ -1,11 +1,12 @@
+/* ======== RESET BÁSICO ======== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ======== ESTILOS GERAIS ======== */
 body {
-
     font-family: Arial, sans-serif;
     background-color: #121212;
     color: #ffffff;
@@ -16,9 +17,11 @@ a {
     text-decoration: none;
 }
 
+/* ======== CABEÇALHO ======== */
 .header {
     background-color: #1f1f1f;
     padding: 15px 30px;
+    display: flex; /* faltava */
     justify-content: space-between;
     align-items: center;
     position: sticky;
@@ -40,7 +43,6 @@ a {
 
 .nav-menu a:hover {
     color: #00e0b3;
-
 }
 
 .menu-toggle {
@@ -52,7 +54,8 @@ a {
     cursor: pointer;
 }
 
-.controls-ection {
+/* ======== SEÇÃO DE CONTROLES ======== */
+.controls-section { /* corrigido: era .controls-ection */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,7 +63,6 @@ a {
     padding: 30px 20px;
     background-color: #121212;
     flex-wrap: wrap;
-
 }
 
 .search-input,
@@ -71,7 +73,17 @@ a {
     background-color: #2c2c2c;
     color: #ffffff;
     font-size: 1em;
-    width: 100%;
+}
+
+.search-input {
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #00e0b3;
+    box-shadow: 0 0 5px #00e0b3;
 }
 
 .filter-dropdown {
@@ -79,27 +91,29 @@ a {
     cursor: pointer;
 }
 
+/* ======== CONTEÚDO PRINCIPAL ======== */
 .main-content {
     padding: 20px;
 }
 
-.lista-filme {
+.lista-filmes { /* corrigido: era .lista-filme */
     display: grid;
     gap: 25px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     justify-content: center;
 }
 
-.card.filme {
+/* ======== CARD DO FILME ======== */
+.card-filme { /* corrigido: era .card.filme */
     background-color: #1f1f1f;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    transition: tranform 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
-.card.filme:hover {
+.card-filme:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
 }
@@ -109,8 +123,10 @@ a {
     height: auto;
     display: block;
     aspect-ratio: 2/3;
+    object-fit: cover;
 }
 
+/* ======== AVALIAÇÃO ======== */
 .avaliacao {
     position: absolute;
     top: 10px;
@@ -122,8 +138,10 @@ a {
     font-weight: bold;
 }
 
+/* ======== DETALHES DO CARD ======== */
 .card-detalhes {
     padding: 15px;
+    text-align: center;
 }
 
 .titulo-filme {
@@ -144,14 +162,14 @@ a {
 }
 
 .botao-adicionar:hover {
-    background-color: #00e0b3;
+    background-color: #00c49a;
 }
 
+/* ======== RESPONSIVIDADE ======== */
 @media (max-width: 768px) {
     .nav-menu a {
         display: none;
     }
-
 
     .menu-toggle {
         display: block;
@@ -163,7 +181,7 @@ a {
         padding: 20px;
     }
 
-    .search-bar {
+    .search-input {
         width: 100%;
         max-width: none;
     }
@@ -172,7 +190,7 @@ a {
         width: 100%;
     }
 
-    .lista-filme {
+    .lista-filmes {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
