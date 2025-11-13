@@ -1,99 +1,100 @@
 const OMDB_API_KEY = 'f55f96f2';
-const listaFilmesContainer = document.querySelector(`.lista-filmes`);
-const searchInput = document.querySelector(`.search-imput`);
+const listaFilmesContainer = document.querySelector('.lista-filmes');
+const searchInput = document.querySelector('.search-input'); // corrigido: era "imput"
 
 // --- A. Função para Criar o HTML do Card ---
-/** 
- * 
-* @param {Object} filme */
-
-function criarCarFilme(filme) {
-    const card = document.createElement(`div`);
-    card.classList.add(`card-filme`);
-    card.dataset.imbId = filme.imbId;
-
+/**
+ * Cria o card de um filme
+ * @param {Object} filme
+ */
+function criarCardFilme(filme) {
+    const card = document.createElement('div');
+    card.classList.add('card-filme');
+    card.dataset.imdbId = filme.imdbID; // corrigido: era "imbId"
 
     const rating = filme.imdbRating ? `⭐ ${filme.imdbRating}` : `⭐ N/A`;
     card.innerHTML = `
-<img src="${filme.Poster !== 'N/A' ? filme.Poster : 'placeholder.jpg'}"
-alt="${filme.Tutle}"
-classe="poster-filme">
-<span class="avaliacao">${rating}</span>
-<div class="card-detalhes">
-<h3 class="titulo-filme">${filme.Title} (${filme.Year})</h3>
-<button class="botao-adicionar" data-title="${filme.Title}">
- +Minha Lista
- </button>
- <div>
- `;
+        <img 
+            src="${filme.Poster !== 'N/A' ? filme.Poster : 'placeholder.jpg'}"
+            alt="${filme.Title}"
+            class="poster-filme"
+        >
+        <span class="avaliacao">${rating}</span>
+        <div class="card-detalhes">
+            <h3 class="titulo-filme">${filme.Title} (${filme.Year})</h3>
+            <button class="botao-adicionar" data-title="${filme.Title}">
+                + Minha Lista
+            </button>
+        </div>
+    `;
 
-    card.addEventListener(`click`, () => buscarEExibirDetalhes(filme.imbId));
+    // Clicar no card mostra detalhes (ainda não implementado)
+    card.addEventListener('click', () => buscarEExibirDetalhes(filme.imdbID));
 
     return card;
-
-
 }
 
-// --- B. função principal de busca ---
+// --- B. Função principal de busca ---
 /**
- * buscar o filme na OMDB e atualizar o container.
- * @param {string} termo - termo
+ * Busca filmes na OMDb e atualiza o container
+ * @param {string} termo - termo de busca
  */
-
 async function buscarFilme(termo) {
     if (!termo) return;
 
-    listaFilmesContainer.innerHTML = `<p style="text-aling: center; color: gray;">Carregando...</p>`;
+    listaFilmesContainer.innerHTML = `<p style="text-align: center; color: gray;">Carregando...</p>`;
 
     try {
-        const Response = await fetch(`https://www.omdbapi.com/?s=${termo}&apikey=${OMDB_API_KEY}`);
-        const data = await Response.json();
+        const response = await fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(termo)}&apikey=${OMDB_API_KEY}`);
+        const data = await response.json();
 
         listaFilmesContainer.innerHTML = '';
 
         if (data.Response === 'True' && data.Search) {
-            data.Search.forEach(async (filmeBase) => {
-                const filmeDetalhado = await buscarDetalhes(filmeBase.imbId);
+            // Busca detalhes de cada filme
+            for (const filmeBase of data.Search) {
+                const filmeDetalhado = await buscarDetalhes(filmeBase.imdbID);
                 if (filmeDetalhado) {
-                    listaFilmesContainer.appendChild(criarCarFilme(filmeDetalhado));
+                    listaFilmesContainer.appendChild(criarCardFilme(filmeDetalhado));
                 }
-            });
+            }
         } else {
-            listaFilmesContainer.innerHTML = `<p style="text-aling: center;">Nenhum filme encontrado para "${termo}".</p>`;
+            listaFilmesContainer.innerHTML = `<p style="text-align: center;">Nenhum filme encontrado para "${termo}".</p>`;
         }
     } catch (error) {
         console.error("Erro ao buscar filme:", error);
-        listaFilmesContainer.innerHTML = '<p style="text-aling: center; color: red;">Erro na conexão com a API.</p>';
+        listaFilmesContainer.innerHTML = '<p style="text-align: center; color: red;">Erro na conexão com a API.</p>';
     }
 }
 
-async function buscarDetalhes(imbId) {
+// --- Função para buscar detalhes de um filme ---
+async function buscarDetalhes(imdbId) {
     try {
-        const Response = await fetch(`https://www.omdbapi.com/?i=${imdbid}&plot=full&apikey=${OMDB_API_KEY}`);
-        const data = await renponse.json();
+        const response = await fetch(`https://www.omdbapi.com/?i=${imdbId}&plot=full&apikey=${OMDB_API_KEY}`);
+        const data = await response.json();
         return data.Response === 'True' ? data : null;
     } catch (error) {
         console.error("Erro ao buscar detalhes:", error);
-
+        return null;
     }
 }
 
-function buscarEExibirDetalhes(imbId) {
-    alert(`funcionalidade de Detalhes/Trailer para o ID: ${imbId} (ainda precisa ser implementada)`);
+// --- Placeholder para detalhes/trailer ---
+function buscarEExibirDetalhes(imdbId) {
+    alert(`Funcionalidade de Detalhes/Trailer para o ID: ${imdbId} (ainda precisa ser implementada)`);
 }
 
+// --- Evento de busca automática com debounce ---
 let searchTimeout;
-searchInput.addEventListener('input' , (event) => {
+searchInput.addEventListener('input', (event) => {
     clearTimeout(searchTimeout);
-
     searchTimeout = setTimeout(() => {
         buscarFilme(event.target.value.trim());
-
-
     }, 500);
 });
 
+// --- Busca inicial ---
 document.addEventListener('DOMContentLoaded', () => {
-    buscarFilme ('popular');
+    buscarFilme('popular');
 });
-
+ok
